@@ -1,0 +1,5 @@
+name = "fret-not-guitar-works"
+# … your other settings …
+
+# Tell Wrangler where to find your site output
+pages_build_output_dir = "public"
