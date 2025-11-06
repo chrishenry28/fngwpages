@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Contact | Fret Not Guitar Works</title>
+
+  <!-- Theme CSS -->
+  <link href="css/styles.css" rel="stylesheet" />
+
+  <style>
+    .alert { padding: 0.85rem 1rem; border-radius: 0.5rem; margin-top: 1rem; display:none; }
+    .alert-success { background:#e6f4ea; border:1px solid #b7e1c1; }
+    .alert-error   { background:#fde8e8; border:1px solid #f5c2c7; }
+    .hp-field { position:absolute; left:-5000px; }
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark py-lg-4" id="mainNav">
+    <div class="container">
+      <a class="navbar-brand text-uppercase fw-bold d-lg-none" href="index.html">Fret Not Guitar Works</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav mx-auto">
+          <li class="nav-item"><a class="nav-link text-uppercase" href="index.html">Home</a></li>
+          <li class="nav-item"><a class="nav-link text-uppercase" href="services.html">Services</a></li>
+          <li class="nav-item"><a class="nav-link text-uppercase" href="projects.html">Behind the Scenes</a></li>
+          <li class="nav-item"><a class="nav-link text-uppercase" href="store.html">Sell/Trade</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <section class="page-section cta">
+    <div class="container">
+      <div class="row">
+        <div class="col-xl-9 mx-auto">
+          <div class="cta-inner bg-faded text-center rounded">
+            <h2 class="section-heading mb-4">
+              <span class="section-heading-upper">Get in Touch</span>
+              <span class="section-heading-lower">We’d love to hear from you</span>
+            </h2>
+
+            <!-- Contact Form -->
+            <form id="contact-form" action="https://formspree.io/f/xnnoevln" method="POST" novalidate>
+              <div class="hp-field" aria-hidden="true">
+                <label>Leave this field empty: <input type="text" name="_gotcha" tabindex="-1" autocomplete="off"></label>
+              </div>
+
+              <input type="hidden" name="_subject" value="New website inquiry (Fret Not Guitar Works)" />
+
+              <input type="hidden" name="_next" value="thank-you.html" />
+
+              <div class="mb-3 text-start">
+                <label class="form-label">Your Name *</label>
+                <input type="text" class="form-control" name="name" placeholder="Enter Name" required />
+              </div>
+
+              <div class="mb-3 text-start">
+                <label class="form-label">Email Address *</label>
+                <input type="email" class="form-control" name="email" placeholder="Enter Email Address" required />
+              </div>
+
+              <div class="mb-3 text-start">
+                <label class="form-label">Phone Number</label>
+                <input type="tel" class="form-control" name="phone" placeholder="Phone Number" />
+              </div>
+
+              <div class="mb-3 text-start">
+                <label class="form-label">Your Question *</label>
+                <textarea class="form-control" name="message" rows="5" placeholder="" required></textarea>
+              </div>
+
+              <button type="submit" class="btn btn-primary text-uppercase" id="sendBtn">Send Message</button>
+
+              <div id="successMsg" class="alert alert-success">Thanks! Your message has been sent.</div>
+              <div id="errorMsg" class="alert alert-error">Sorry—something went wrong. Please try again or email <a href="mailto:info@fretnotguitarworks.com">info@fretnotguitarworks.com</a>.</div>
+            </form>
+
+            <p class="mt-4">
+              Prefer email? <a href="mailto:info@fretnotguitarworks.com">info@fretnotguitarworks.com</a>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" defer></script>
+  <script src="js/scripts.js" defer></script>
+
+  <script>
+    (function () {
+      const form = document.getElementById('contact-form');
+      const success = document.getElementById('successMsg');
+      const error = document.getElementById('errorMsg');
+      const btn = document.getElementById('sendBtn');
+
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        success.style.display = 'none';
+        error.style.display = 'none';
+        btn.disabled = true;
+
+        const formData = new FormData(form);
+
+        try {
+          const res = await fetch(form.action, {
+            method: 'POST',
+            headers: { 'Accept': 'application/json' },
+            body: formData
+          });
+
+          if (res.ok) {
+            form.reset();
+            success.style.display = 'block';
+          } else {
+            error.style.display = 'block';
+          }
+        } catch {
+          error.style.display = 'block';
+        } finally {
+          btn.disabled = false;
+        }
+      });
+    })();
+  </script>
+</body>
+</html>
